@@ -1,4 +1,4 @@
-import { getUserData } from "@/actions/getUserClient";
+import { getUserData } from "@/actions/getUserData";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
@@ -6,9 +6,9 @@ export default async function Home() {
 
   if (!userData) return redirect("/signin");
 
-  return (
-    <div>
-      <p>Slack</p>
-    </div>
-  );
+  const userWorkspaceId = userData.workspaces?.[0];
+
+  if (!userWorkspaceId) return redirect('/create-workspace');
+
+  if (userWorkspaceId) return redirect(`/workspace/${userWorkspaceId}`);
 }
