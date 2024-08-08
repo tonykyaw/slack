@@ -16,10 +16,19 @@ export type Workspace = {
   created_at: string
   id: string
   image_url: string | null
-  invite_code: string | null
+  invite_code: string
   members: string[] | null
   name: string
   regulators: string[] | null
   slug: string
   super_admin: string
-}
+};
+
+export type Channel = {
+  id: string
+  members: string[] | null
+  name: string
+  regulators: string[] | null
+  user_id: string
+  workspace_id: string
+};
