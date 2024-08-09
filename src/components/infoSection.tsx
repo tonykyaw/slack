@@ -40,11 +40,11 @@ const InfoSection: FC<{
     backgroundColor = "bg-blue-900";
   }
 
-  let secondayBg = "bg-primary-dark";
+  let secondaryBg = "bg-primary-dark";
   if (color === "green") {
-    secondayBg = "bg-green-700";
+    secondaryBg = "bg-green-700";
   } else if (color === "blue") {
-    secondayBg = "bg-blue-700";
+    secondaryBg = "bg-blue-700";
   }
 
   const navigateToChannel = (channelId: string) => {
@@ -79,7 +79,7 @@ const InfoSection: FC<{
               <div
                 className={cn(
                   "cursor-pointer p-2 rounded-full",
-                  `hover:${secondayBg}`
+                  `hover:${secondaryBg}`
                 )}
               >
                 <FaPlus onClick={() => setDialogOpen(true)} />
@@ -95,8 +95,8 @@ const InfoSection: FC<{
                     text={`# ${channel.name}`}
                     className={cn(
                       "px-2 py-1 rounded-sm cursor-pointer",
-                      `hover:${secondayBg}`,
-                      activeChannel && secondayBg
+                      `hover:${secondaryBg}`,
+                      activeChannel && secondaryBg
                     )}
                     onClick={() => navigateToChannel(channel.id)}
                   />
@@ -125,7 +125,7 @@ const InfoSection: FC<{
               <div
                 className={cn(
                   "cursor-pointer p-2 rounded-full",
-                  `hover:${secondayBg}`
+                  `hover:${secondaryBg}`
                 )}
               >
                 <FaPlus />

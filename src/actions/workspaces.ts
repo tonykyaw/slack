@@ -21,7 +21,7 @@ export const getCurrentWorksaceData = async (workspaceId: string) => {
 
   const { data, error } = await supabase
     .from("workspaces")
-    .select("*")
+    .select("*, channels (*)")
     .eq("id", workspaceId)
     .single();
 

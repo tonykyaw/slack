@@ -11,6 +11,7 @@ export type Database = {
     Tables: {
       channels: {
         Row: {
+          created_at: string
           id: string
           members: string[] | null
           name: string
@@ -19,6 +20,7 @@ export type Database = {
           workspace_id: string
         }
         Insert: {
+          created_at?: string
           id?: string
           members?: string[] | null
           name: string
@@ -27,6 +29,7 @@ export type Database = {
           workspace_id: string
         }
         Update: {
+          created_at?: string
           id?: string
           members?: string[] | null
           name?: string
@@ -44,6 +47,64 @@ export type Database = {
           },
           {
             foreignKeyName: "channels_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          channel_id: string
+          content: string | null
+          created_at: string
+          file_url: string | null
+          id: string
+          is_deleted: boolean
+          updated_at: string | null
+          user_id: string
+          workspace_id: string
+        }
+        Insert: {
+          channel_id: string
+          content?: string | null
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          is_deleted?: boolean
+          updated_at?: string | null
+          user_id?: string
+          workspace_id: string
+        }
+        Update: {
+          channel_id?: string
+          content?: string | null
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          is_deleted?: boolean
+          updated_at?: string | null
+          user_id?: string
+          workspace_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_channel_id_fkey"
+            columns: ["channel_id"]
+            isOneToOne: false
+            referencedRelation: "channels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_workspace_id_fkey"
             columns: ["workspace_id"]
             isOneToOne: false
             referencedRelation: "workspaces"
@@ -150,6 +211,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_channel_to_workspace: {
+        Args: {
+          channel_id: string
+          workspace_id: string
+        }
+        Returns: undefined
+      }
       add_member_to_workspace: {
         Args: {
           user_id: string
